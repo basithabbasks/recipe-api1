@@ -1,155 +1,77 @@
 .
+# Recipe API
 
-🍽️ Recipe Sharing API – README
-📌 Overview
+Simple Node.js + Express API for sharing recipes. This repository contains the backend used to create and list recipes stored in JSON files under `data/`.
 
-This is a backend API built using Node.js and Express for a simple recipe-sharing platform.
-Users can:
+Repository: https://github.com/basithabbasks/recipe-api1
 
-➕ Add new recipes
+## Quick start
 
-📄 View all recipes
+Requirements: Node.js (>=14) and npm
 
-💾 Store recipes in data/recipes.json
+From PowerShell:
+```
+Set-Location 'C:\Users\LENOVO\Downloads\recipe-api\recipe-api1'
+npm ci
+node server.js
+```
 
-🌍 Interact with frontend using CORS
+For development with auto-reload (optional):
+```
+npx nodemon server.js
+```
 
-The API is fully deployed on Render.
+Server default port is read from `process.env.PORT` (use `.env` or set `PORT` before running).
 
-🚀 Live API URL
-https://recipie-api-5w32.onrender.com
+## API Endpoints
 
-📡 API Endpoints
-1️⃣ Add a New Recipe (POST)
+- Get all recipes
+  - Method: GET
+  - URL: `/api/recipes`
+  - Response: 200 OK — array of recipe objects
 
-URL:
+- Add new recipe
+  - Method: POST
+  - URL: `/api/recipes`
+  - Body (JSON):
+    ```json
+    {
+      "title": "Pasta",
+      "ingredients": "Pasta, Tomato sauce, Salt",
+      "instructions": "Boil pasta and mix with sauce",
+      "cookTime": "20 minutes"
+    }
+    ```
+  - Response: 201 Created — created recipe object with `id`
 
-POST /api/recipes
+Notes: `title`, `ingredients`, and `instructions` are required by the server logic.
 
+## Project structure
 
-Request Body (JSON)
+```
+recipe-api1/
+├─ data/                # recipes stored as JSON
+├─ routes/              # route handlers (recipeRoutes.js)
+├─ server.js            # app entrypoint
+├─ package.json
+├─ .env.example
+└─ README.MD
+```
 
-{
-  "title": "Pasta",
-  "ingredients": "Pasta, Tomato sauce, Salt",
-  "instructions": "Boil pasta and mix with sauce",
-  "cookTime": "20 minutes"
-}
+## Run locally (short)
+1. `npm ci`
+2. `node server.js` (or `npx nodemon server.js`)
+3. Visit `http://localhost:PORT` (default PORT in `.env` or 3000)
 
+## Deployment
+This project was deployed previously on Render. Configure the `PORT` environment variable in your host environment.
 
-Validation:
+## Contributing
+- Open issues or pull requests on GitHub.
 
-title, ingredients, instructions → required
+## Contact
+Author: Basith Abbas
 
-difficulty → optional (default = "medium")
-
-Example Success Response (201)
-
-{
-  "id": 1732538092314,
-  "title": "Pasta",
-  "ingredients": "Pasta, Tomato sauce, Salt",
-  "instructions": "Boil pasta and mix with sauce",
-  "cookTime": "20 minutes",
-  "difficulty": "medium"
-}
-
-2️⃣ Get All Recipes (GET)
-
-URL:
-
-GET /api/recipes
-
-
-Response Example (200)
-
-[
-  {
-    "id": 1732538092314,
-    "title": "Pasta",
-    "ingredients": "Pasta, Tomato sauce, Salt",
-    "instructions": "Boil pasta and mix with sauce",
-    "cookTime": "20 minutes",
-    "difficulty": "medium"
-  }
-]
-
+---
+Updated README: adds run instructions, endpoints, and examples.
 📁 Project Structure
-recipe-api/
-│
-├── data/
-│   └── recipes.json
-│
-├── routes/
-│   └── recipeRoutes.js
-│
-├── server.js
-├── package.json
-├── .env.example
-└── README.md
-
-🛠️ How to Run Project Locally
-1️⃣ Clone the Repository
-git clone https://github.com/Ahmed-Rafi07/recipie-api
-cd recipe-api
-
-2️⃣ Install Dependencies
-npm install
-
-3️⃣ Create a .env file
-PORT=3000
-
-4️⃣ Start the Server
-npm run dev
-
-
-or
-
-npm start
-
-
-Server will run at:
-
-http://localhost:3000
-
-🌍 Deployment (Render)
-Deployment Settings
-Setting	Value
-Build Command	npm install
-Start Command	npm start
-Runtime	Node
-Instance	Free
-Environment Variables
-PORT=3000
-
-📄 Submission Requirements (Included)
-
-✔ All project files (server.js, routes, data, package.json, etc.)
-
-✔ README.md
-
-✔ PDF with:
-
-Postman POST screenshot
-
-Postman GET screenshot
-
-Render dashboard screenshot
-
-Live API URL
-
-Challenges faced
-
-⚠️ Challenges Faced (Sample)
-
-Render required correct PORT configuration using process.env.PORT.
-
-JSON file path had to be relative (./data/recipes.json).
-
-Initial deployment failed due to typos (e.g., variable name mismatches).
-
-Delay in response on free Render tier due to cold start.
-
-👤 Author
-
-Basith Abbas 
